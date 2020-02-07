@@ -1,4 +1,4 @@
-import tkinter, ctypes, keyboard, os
+import tkinter, ctypes, keyboard, os, time
 
 # If not Windows, stop running
 if os.name != 'nt':
@@ -37,7 +37,7 @@ class Showcase:
 
         self.tk.focus_force() # Focus on layer
 
-        # Add a hotkey for Ctrl+Alt+Del and Win+L
+        # Add hotkeys for Ctrl+Alt+Del and Win+L
         keyboard.add_hotkey('ctrl+alt+del', self.exit, args=[])
         keyboard.add_hotkey('Win+L', self.exit, args=[])
 
@@ -49,11 +49,15 @@ class Showcase:
         ctypes.windll.user32.LockWorkStation()
         enableDisplayOff()
         keyboard.unhook_all_hotkeys()
-        self.tk.destroy()
         print('Done.')
+        self.tk.destroy()
         
 
 if __name__ == '__main__':
+    # Wait 10 seconds for users to setup their showcase
+    print("Waiting 10 seconds before locking the showcase.")
+    time.sleep(10)
+
     # Disable keyboard and mouse inputs
     x = ctypes.windll.user32.BlockInput(True)
 
