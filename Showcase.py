@@ -7,11 +7,12 @@ if os.name != 'nt':
 # Force the display to be on
 # Documentation: https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-setthreadexecutionstate
 ES_CONTINUOUS = 0x80000000
+ES_SYSTEM_REQUIRED = 0x00000001
 ES_DISPLAY_REQUIRED = 0x00000002
 
 def disableDisplayOff():
     ctypes.windll.kernel32.SetThreadExecutionState(
-        ES_CONTINUOUS | ES_DISPLAY_REQUIRED)
+        ES_CONTINUOUS | ES_SYSTEM_REQUIRED | ES_DISPLAY_REQUIRED)
 
 def enableDisplayOff():
     ctypes.windll.kernel32.SetThreadExecutionState(
